@@ -1,0 +1,56 @@
+
+> test
+> npm run test -w contracts
+
+
+> test
+> hardhat test
+
+
+
+  ReceivableHub randomized accounting
+    √ conserves balances and bonds across 24 varied invoice lifecycles (12044ms)
+
+  ReceivableHub
+    √ registers terms and reserves the invoice hash (1940ms)
+    √ pays the supplier once and settles the funder with the bond returned (510ms)
+    √ pays the bond on default and only the remainder on cure (385ms)
+    √ counts late direct settlement as a default and late repayment (179ms)
+    √ returns the bond when an approval expires (237ms)
+    √ lets the supplier cancel a draft but keeps its hash reserved (60ms)
+    √ rejects zero buyer (68ms)
+    √ rejects zero hash
+    √ rejects zero face value
+    √ rejects zero advance
+    √ rejects advance equal to face
+    √ rejects advance above face
+    √ rejects zero bond
+    √ rejects full bond
+    √ rejects bond above face
+    √ rejects past funding deadline
+    √ rejects past due date
+    √ rejects identical supplier and buyer
+    √ rejects a due date at the funding deadline
+    √ rejects duplicate invoices
+    √ rejects operations on an unknown invoice
+    √ rejects unauthorized approveReceivable
+    √ rejects unauthorized cancelDraft
+    √ rejects a second funding without paying the supplier again
+    √ rejects cancellation after funding
+    √ rejects default before the due date
+    √ rejects early expiry
+    √ rejects unauthorized settleReceivable
+    √ rejects unauthorized cureDefault
+    √ rejects repeat settlement
+    √ rejects repeat default and repeat cure
+    √ rejects the supplier as funder
+    √ rejects the buyer as funder
+    √ rejects funding exactly at the deadline (209ms)
+    √ rejects approval after the deadline (38ms)
+    √ allows settlement exactly at the due date (144ms)
+    √ rolls approval back when the buyer has not approved token spending (279ms)
+    √ keeps other invoice bonds intact through settlement and default (136ms)
+
+
+  39 passing (17s)
+

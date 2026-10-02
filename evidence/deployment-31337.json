@@ -1,0 +1,12 @@
+{
+  "network": "localhost",
+  "chainId": 31337,
+  "hub": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
+  "token": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  "symbol": "mUSDG",
+  "decimals": 6,
+  "blockNumber": 5,
+  "deploymentTransaction": "0x83a444527ab1a087f653c2177949d804a663078a3db7fe0cc49b53617b005843",
+  "sourceVerified": false,
+  "deployedAt": "2026-10-02T15:46:51.006Z"
+}

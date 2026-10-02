@@ -1,0 +1,97 @@
+{
+  "chainId": 421614,
+  "network": "arbitrumSepolia",
+  "hub": "0x6b88f5830449ac0A991A7f80a9659eCea3A49423",
+  "token": "0xFFC95faa3d63Cde504a05B567C600B78C0b41892",
+  "supplier": "0x261b67864FA0421AB8048a469ef6cb4F3Ce9C697",
+  "buyer": "0x771136b723F395dfe4B00168AF9755dB06060c2E",
+  "funder": "0xC2818d5E6a9d9136dF8729C8f3169a6E53cE653E",
+  "testData": true,
+  "completed": true,
+  "transactions": [
+    {
+      "label": "Buyer token allowance",
+      "hash": "0xf09594c19ed6efdeded581518362cf3b6b27c733ad68b550511dfb435b412b4a",
+      "status": "success",
+      "blockNumber": 315033439
+    },
+    {
+      "label": "Funder token allowance",
+      "hash": "0x08afe2617aa639b1c4390c002c756f5d818c4b9131f9509cdeba000edd684810",
+      "status": "success",
+      "blockNumber": 315033479
+    },
+    {
+      "label": "Create on-time invoice",
+      "hash": "0x0c7a8d142fed0cdd67a7dbe7b68b0b0196a8b09cbed130732da4af60b1cb9762",
+      "status": "success",
+      "blockNumber": 315033539
+    },
+    {
+      "label": "Buyer approves on-time invoice",
+      "hash": "0x89748a2baa521a00bb0543ecaab22b23bf39b5a1483169887ee5ec050f0cac25",
+      "status": "success",
+      "blockNumber": 315033581
+    },
+    {
+      "label": "Funder finances on-time invoice",
+      "hash": "0xe6d4a2f129fdb4ad077252cd91d497ae7464b3d3ff7f0820976766959bcee72a",
+      "status": "success",
+      "blockNumber": 315033602
+    },
+    {
+      "label": "Buyer settles on-time invoice",
+      "hash": "0x3c8b4dd6032fe0da1e27003f8d10ecdf63ad3d4964e94f0205bfdc29468dc1ff",
+      "status": "success",
+      "blockNumber": 315033649
+    },
+    {
+      "label": "Create accelerated default invoice",
+      "hash": "0x5dc5e11f49450f46a44eeb93a67507c214cc125ecb7469e40030c17ce91b2e3b",
+      "status": "success",
+      "blockNumber": 315033691
+    },
+    {
+      "label": "Buyer approves default invoice",
+      "hash": "0xc90c0567e0d3539f6bd549b4cae7476421450cbcb4ecc09485ccefeb9ec0476b",
+      "status": "success",
+      "blockNumber": 315033731
+    },
+    {
+      "label": "Funder finances default invoice",
+      "hash": "0x1bcc4aeef40596a2140d0456485c25cb651f0ad578608979f7d4fbed2e23adbb",
+      "status": "success",
+      "blockNumber": 315033777
+    },
+    {
+      "label": "Declare default and release bond",
+      "hash": "0xb35e3aeb6a7f0d9ec03cc9aa5ef537ece70e0fc49505fb65c938e029609dc72b",
+      "status": "success",
+      "blockNumber": 315034436
+    },
+    {
+      "label": "Buyer cures remaining debt",
+      "hash": "0xe9106239ee2f65131c9b2c8362828d300b086c38c760d27b3e86ae809b069ce6",
+      "status": "success",
+      "blockNumber": 315034527
+    }
+  ],
+  "simulations": [
+    {
+      "label": "Second funding rejected",
+      "method": "eth_call",
+      "error": "ReceivableAlreadyFunded",
+      "invoiceId": "0"
+    },
+    {
+      "label": "Post-funding cancellation rejected",
+      "method": "eth_call",
+      "error": "PostFundingCancellationForbidden",
+      "invoiceId": "0"
+    }
+  ],
+  "onTimeInvoice": "0",
+  "defaultInvoice": "1",
+  "defaultOutstanding": "9000000",
+  "completedAt": "2026-10-02T16:07:17.069Z"
+}

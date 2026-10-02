@@ -1,0 +1,11 @@
+const { Wallet } = require('ethers');
+const fs = require('node:fs');
+const path = require('node:path');
+const destination = path.resolve(__dirname, '../.env');
+if (fs.existsSync(destination)) throw new Error('Existing wallet configuration preserved. Refusing to overwrite.');
+const wallets = ['DEPLOYER', 'BUYER', 'FUNDER'].map(role => ({ role, wallet: Wallet.createRandom() }));
+fs.writeFileSync(destination, '# Local testnet demo wallets. Never commit this file.\n' + wallets.map(({role,wallet}) => `${role}_PRIVATE_KEY=${wallet.privateKey}`).join('\n') + '\n', { flag: 'wx', mode: 0o600 });
+const publicData = Object.fromEntries(wallets.map(({role,wallet}) => [role.toLowerCase(), wallet.address]));
+fs.mkdirSync(path.resolve(__dirname, '../../evidence'), { recursive: true });
+fs.writeFileSync(path.resolve(__dirname, '../../evidence/wallets.json'), JSON.stringify({ network: 'arbitrumSepolia', chainId: 421614, ...publicData }, null, 2));
+console.log(JSON.stringify(publicData, null, 2));

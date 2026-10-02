@@ -1,0 +1,14 @@
+{
+  "name": "receiva",
+  "private": true,
+  "workspaces": ["contracts", "apps/web"],
+  "scripts": {
+    "test": "npm run test -w contracts",
+    "compile": "npm run compile -w contracts",
+    "build": "npm run compile && npm run abi -w contracts && npm run build -w apps/web",
+    "dev": "npm run dev -w apps/web",
+    "node": "npm run node -w contracts",
+    "deploy:local": "npm run deploy:local -w contracts",
+    "deploy:sepolia": "npm run deploy:sepolia -w contracts"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "network": "arbitrumSepolia",
+  "chainId": 421614,
+  "hub": "0x6b88f5830449ac0A991A7f80a9659eCea3A49423",
+  "token": "0xFFC95faa3d63Cde504a05B567C600B78C0b41892",
+  "symbol": "USDG",
+  "decimals": 6,
+  "blockNumber": 315033181,
+  "deploymentTransaction": "0x97708396fc762d0b9afa32062776ab17d4d9768e8425bc3542f94f0b9bebecca",
+  "sourceVerified": false,
+  "deployedAt": "2026-10-02T16:01:40.938Z"
+}

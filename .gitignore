@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+contracts/artifacts/
+contracts/cache/
+coverage/
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+playwright-report/
+test-results/

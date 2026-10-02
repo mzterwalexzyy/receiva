@@ -1,0 +1,13 @@
+import { createConfig, http, injected } from "wagmi";
+import { arbitrumSepolia, hardhat } from "wagmi/chains";
+import { isAddress, type Address } from "viem";
+export const chain = process.env.NEXT_PUBLIC_CHAIN_ID === "31337" ? hardhat : arbitrumSepolia;
+export const rpc = process.env.NEXT_PUBLIC_RPC_URL || chain.rpcUrls.default.http[0];
+export const config = createConfig({ chains: [chain], connectors: [injected()], transports: { [hardhat.id]: http(rpc), [arbitrumSepolia.id]: http(rpc) }, ssr: true });
+const configured = process.env.NEXT_PUBLIC_HUB_ADDRESS || "";
+export const hubAddress = isAddress(configured) ? configured as Address : undefined;
+export const deploymentBlock = BigInt(process.env.NEXT_PUBLIC_DEPLOYMENT_BLOCK || "0");
+export const explorer = chain.id === 421614 ? "https://sepolia.arbiscan.io" : undefined;
+export const short = (value: string) => `${value.slice(0, 6)}…${value.slice(-4)}`;
+export const states = ["Draft", "Approved", "Funded", "Settled", "Defaulted", "Settled late", "Cancelled", "Expired"];
+export type Receivable = { id: bigint; invoiceHash: `0x${string}`; supplier: Address; buyer: Address; funder: Address; faceValue: bigint; advanceAmount: bigint; bondAmount: bigint; outstandingAmount: bigint; dueDate: bigint; fundingDeadline: bigint; status: number };

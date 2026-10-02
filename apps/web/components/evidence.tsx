@@ -1,0 +1,7 @@
+"use client";
+import { hubAddress, explorer, chain } from "@/lib/chain";
+import { useProtocol } from "@/lib/hooks";
+export function Evidence() {
+  const { data } = useProtocol();
+  return <div className="two-col"><section className="panel"><h2>Verify this build</h2><p style={{ marginTop: 10 }} className="subtle">Follow the contracts and transaction receipts behind each invoice.</p><div className="evidence-list"><span className="subtle">Network: {chain.name}</span>{hubAddress ? <><a href={explorer ? `${explorer}/address/${hubAddress}#code` : undefined} target="_blank" rel="noreferrer">ReceivableHub · {hubAddress}</a>{data && <a href={explorer ? `${explorer}/token/${data.token}` : undefined} target="_blank" rel="noreferrer">{data.symbol} · {data.token}</a>}<p className="subtle">Transaction evidence is available on each receivable’s timeline. Source verification must be checked on the explorer.</p></> : <p className="subtle">Deployment pending. No live contract or transaction claims are made.</p>}</div></section><section className="panel risk-copy"><h3>What this demo proves</h3><p style={{ marginTop: 12 }}>Funding, bond custody and repayment are enforced by the deployed contract. Invoice files stay local. Business identities and accelerated demo dates are illustrative.</p><p>A partial bond reduces loss. It doesn’t guarantee repayment. Legal assignment, buyer verification and offchain debt enforcement are future work. Hash uniqueness applies only to identical files registered in this contract.</p></section></div>;
+}
