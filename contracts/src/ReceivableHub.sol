@@ -26,6 +26,8 @@ contract ReceivableHub is ReentrancyGuard {
     uint256 public nextReceivableId;
     uint256 public totalActiveBonds;
     mapping(uint256 => Receivable) public receivables;
+    /// @notice Registration keys are scoped to the supplier. This prevents a third party
+    /// from permanently squatting on a supplier's document hash.
     mapping(bytes32 => bool) public registeredInvoiceHashes;
     mapping(address => uint256) public successfulRepayments;
     mapping(address => uint256) public lateRepayments;
@@ -46,6 +48,10 @@ contract ReceivableHub is ReentrancyGuard {
     error PostFundingCancellationForbidden();
     error ReceivableAlreadyFunded();
 
+    function registrationKey(bytes32 invoiceHash, address supplier) public pure returns (bytes32) {
+        return keccak256(abi.encode(invoiceHash, supplier));
+    }
+
     event ReceivableCreated(uint256 indexed id, bytes32 indexed invoiceHash, address indexed supplier, address buyer, uint256 faceValue, uint256 advanceAmount);
     event ReceivableApproved(uint256 indexed id, address indexed buyer, uint256 bondAmount);
     event ReceivableFunded(uint256 indexed id, address indexed funder, uint256 advanceAmount);
@@ -63,11 +69,12 @@ contract ReceivableHub is ReentrancyGuard {
     function createReceivable(bytes32 invoiceHash, address buyer, uint128 faceValue, uint128 advanceAmount, uint128 requiredBond, uint64 dueDate, uint64 fundingDeadline) external returns (uint256 id) {
         if (buyer == address(0) || buyer == msg.sender || buyer == address(this)) revert InvalidParticipant();
         if (invoiceHash == bytes32(0)) revert InvalidInvoiceHash();
-        if (registeredInvoiceHashes[invoiceHash]) revert DuplicateInvoice();
+        bytes32 key = registrationKey(invoiceHash, msg.sender);
+        if (registeredInvoiceHashes[key]) revert DuplicateInvoice();
         if (advanceAmount == 0 || advanceAmount >= faceValue || requiredBond == 0 || requiredBond >= faceValue) revert InvalidAmount();
         if (fundingDeadline <= block.timestamp || dueDate <= fundingDeadline) revert InvalidDates();
         id = nextReceivableId++;
-        registeredInvoiceHashes[invoiceHash] = true;
+        registeredInvoiceHashes[key] = true;
         receivables[id] = Receivable(invoiceHash, msg.sender, buyer, address(0), faceValue, advanceAmount, requiredBond, 0, dueDate, fundingDeadline, Status.Draft);
         emit ReceivableCreated(id, invoiceHash, msg.sender, buyer, faceValue, advanceAmount);
     }

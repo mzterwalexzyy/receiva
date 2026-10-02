@@ -6,7 +6,7 @@ An attacker cannot become a second funder, change an existing funder, cancel a f
 
 Approval expresses a wallet's agreement to an invoice's terms. It does not prove the buyer's real-world identity, legal obligation or ability to pay. Related parties can use multiple wallets and fake repayment history. Hash registration does not prove ownership and is vulnerable to hash squatting. Changing PDF bytes defeats exact duplicate detection. Cross-platform duplicate financing is not prevented.
 
-Public terms and hashes can disclose relationships and support document-guessing attacks. PDFs must be shared through an existing private business channel. Lost keys can prevent repayment or recovery. There is no administrative rescue for accidental token transfers.
+Public terms and hashes can disclose relationships and support document-guessing attacks. PDFs must be shared through an existing private business channel. Hash registration is scoped to the supplier, which prevents cross-supplier hash squatting but does not prove document ownership. Lost keys can prevent repayment or recovery. There is no administrative rescue for accidental token transfers.
 
 Date boundaries: approval/funding before fundingDeadline, expiry at or after fundingDeadline, on-time settlement at or before dueDate, default after dueDate. A stale browser clock can cause the UI to offer a transaction that the chain rejects. The contract is authoritative.
 

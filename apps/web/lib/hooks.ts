@@ -4,12 +4,13 @@ import { useAccount, usePublicClient, useWalletClient } from "wagmi";
 import { erc20Abi, formatUnits, type Address, type Hash, BaseError, type Abi } from "viem";
 import { useState } from "react";
 import { hubAbi } from "./abi";
-import { hubAddress, chain, type Receivable } from "./chain";
+import { hubAddress, chain, expectedToken, type Receivable } from "./chain";
 
 export function useProtocol() {
   const client = usePublicClient();
   return useQuery({ queryKey: ["protocol", hubAddress], enabled: !!hubAddress && !!client, queryFn: async () => {
     const token = await client!.readContract({ address: hubAddress!, abi: hubAbi, functionName: "USDG" });
+    if (token.toLowerCase() !== expectedToken.toLowerCase()) throw new Error("Configured hub is not using the verified Arbitrum Sepolia USDG token.");
     const [decimals, symbol] = await Promise.all([
       client!.readContract({ address: token, abi: erc20Abi, functionName: "decimals" }),
       client!.readContract({ address: token, abi: erc20Abi, functionName: "symbol" })

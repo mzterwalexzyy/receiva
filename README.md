@@ -48,7 +48,7 @@ The deployment script refuses other networks. It records addresses and writes `a
 - Settlement on or before the due date sends the face value to the funder and returns the bond.
 - After the due date, anyone can mark default and pay the bond to the funder. The buyer can cure the remaining debt.
 - Direct late settlement records both a default and a late repayment, consumes the bond and charges only the remainder.
-- Each nonzero file hash can be registered once. This is byte-level uniqueness within this contract, not a global duplicate-invoice guarantee.
+- Each nonzero file hash can be registered once per supplier. Registration is scoped to the supplier so another wallet cannot squat on a supplier's hash. This is byte-level uniqueness within this contract, not a global duplicate-invoice guarantee.
 
 No admin, fees, upgrades, arbitrary token selection after deployment or owner withdrawals. Uses OpenZeppelin SafeERC20 and ReentrancyGuard. Official USDG has issuer-controlled pause, freeze and upgrade powers outside Receiva’s control.
 

@@ -6,6 +6,7 @@ export const rpc = process.env.NEXT_PUBLIC_RPC_URL || chain.rpcUrls.default.http
 export const config = createConfig({ chains: [chain], connectors: [injected()], transports: { [hardhat.id]: http(rpc), [arbitrumSepolia.id]: http(rpc) }, ssr: true });
 const configured = process.env.NEXT_PUBLIC_HUB_ADDRESS || "";
 export const hubAddress = isAddress(configured) ? configured as Address : undefined;
+export const expectedToken = "0xFFC95faa3d63Cde504a05B567C600B78C0b41892" as Address;
 export const deploymentBlock = BigInt(process.env.NEXT_PUBLIC_DEPLOYMENT_BLOCK || "0");
 export const explorer = chain.id === 421614 ? "https://sepolia.arbiscan.io" : undefined;
 export const short = (value: string) => `${value.slice(0, 6)}…${value.slice(-4)}`;

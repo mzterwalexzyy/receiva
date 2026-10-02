@@ -573,6 +573,30 @@ export const hubAbi = [
   {
     "inputs": [
       {
+        "internalType": "bytes32",
+        "name": "invoiceHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "supplier",
+        "type": "address"
+      }
+    ],
+    "name": "registrationKey",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "id",
         "type": "uint256"

@@ -25,7 +25,7 @@ describe("ReceivableHub", function () {
     await expect(create()).to.emit(hub, "ReceivableCreated").withArgs(0, hash, supplier.address, buyer.address, 1000, 980);
     const r = await hub.receivables(0);
     expect(r.supplier).eq(supplier.address); expect(r.status).eq(0); expect(await hub.nextReceivableId()).eq(1);
-    expect(await hub.registeredInvoiceHashes(hash)).eq(true);
+    expect(await hub.registeredInvoiceHashes(await hub.registrationKey(hash, supplier.address))).eq(true);
   });
   it("pays the supplier once and settles the funder with the bond returned", async () => {
     const { hub, token, supplier, buyer, funder, fund } = await loadFixture(fixture);
@@ -63,9 +63,15 @@ describe("ReceivableHub", function () {
     expect((await hub.receivables(0)).status).eq(7);
   });
   it("lets the supplier cancel a draft but keeps its hash reserved", async () => {
-    const { hub, create, hash } = await loadFixture(fixture);
+    const { hub, create, hash, supplier } = await loadFixture(fixture);
     await create(); await hub.cancelDraft(0);
-    expect((await hub.receivables(0)).status).eq(6); expect(await hub.registeredInvoiceHashes(hash)).eq(true);
+    expect((await hub.receivables(0)).status).eq(6); expect(await hub.registeredInvoiceHashes(await hub.registrationKey(hash, supplier.address))).eq(true);
+  });
+  it("does not let another supplier squat on a supplier's invoice hash", async () => {
+    const { hub, hash, args, supplier, stranger } = await loadFixture(fixture);
+    await hub.connect(stranger).createReceivable(hash, args[1], args[2], args[3], args[4], args[5], args[6]);
+    await hub.connect(supplier).createReceivable(hash, args[1], args[2], args[3], args[4], args[5], args[6]);
+    expect(await hub.nextReceivableId()).eq(2);
   });
   const invalid = [
     ["zero buyer", 1, ethers.ZeroAddress, "InvalidParticipant"],
