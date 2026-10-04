@@ -1,0 +1,1 @@
+export function Brand(){return <span className="receiva-brand"><span className="receiva-mark"><img src="/receiva-mark.png" width="64" height="64" alt=""/></span><span>receiva<span className="brand-dot">.</span></span></span>;}

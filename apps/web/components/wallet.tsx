@@ -12,6 +12,6 @@ export function Wallet() {
   return <div className="wallet-wrap">{mounted && address ? <>
     {chainId !== chain.id && <button className="button" onClick={() => switchChain({ chainId: chain.id })}>Switch network</button>}
     <button className="button secondary" title="Disconnect wallet" onClick={() => disconnect()}>{short(address)} · Disconnect</button>
-  </> : <button className="button" disabled={isPending || !mounted} onClick={() => connect({ connector: connectors[0] })}>{isPending ? "Connecting…" : "Connect wallet"}</button>}
+  </> : <button className="button" disabled={isPending || !mounted || !connectors.length} onClick={() => connect({ connector: connectors[0] })}>{isPending ? "Connecting…" : !connectors.length && mounted ? "Wallet unavailable" : "Connect wallet"}</button>}
   {(error || switchError) && <span className="wallet-error" role="alert">{errorText(error || switchError)}</span>}</div>;
 }
